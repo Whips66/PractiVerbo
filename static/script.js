@@ -110,24 +110,60 @@ async function selectAnswer(answer, button) {
     // Check answer
     const isCorrect = answer === currentQuestion.correct_answer;
     
-    // Update button styling
-    if (isCorrect) {
-        button.classList.add('correct');
-        showFeedback(true);
-        updateScore(true);
-        playSound('correct');
-    } else {
-        button.classList.add('incorrect');
-        showFeedback(false);
-        updateScore(false);
-        playSound('incorrect');
-        
-        // Highlight correct answer
-        allButtons.forEach(btn => {
-            if (btn.textContent === currentQuestion.correct_answer) {
-                btn.classList.add('correct');
-            }
+    // Send answer to server for validation and get tense description
+    try {
+        const response = await fetch('/api/check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                answer: answer,
+                correct_answer: currentQuestion.correct_answer,
+                tense: currentQuestion.tense
+            })
         });
+        const result = await response.json();
+        
+        // Update button styling
+        if (isCorrect) {
+            button.classList.add('correct');
+            showFeedback(true, result);
+            updateScore(true);
+            playSound('correct');
+        } else {
+            button.classList.add('incorrect');
+            showFeedback(false, result);
+            updateScore(false);
+            playSound('incorrect');
+            
+            // Highlight correct answer
+            allButtons.forEach(btn => {
+                if (btn.textContent === currentQuestion.correct_answer) {
+                    btn.classList.add('correct');
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error checking answer:', error);
+        // Fallback to local check
+        if (isCorrect) {
+            button.classList.add('correct');
+            showFeedback(true, {});
+            updateScore(true);
+            playSound('correct');
+        } else {
+            button.classList.add('incorrect');
+            showFeedback(false, {});
+            updateScore(false);
+            playSound('incorrect');
+            
+            allButtons.forEach(btn => {
+                if (btn.textContent === currentQuestion.correct_answer) {
+                    btn.classList.add('correct');
+                }
+            });
+        }
     }
     
     // Show next button
@@ -136,7 +172,7 @@ async function selectAnswer(answer, button) {
 }
 
 // Show feedback message
-function showFeedback(isCorrect) {
+function showFeedback(isCorrect, result = {}) {
     const correctMessages = [
         '¡Excelente! 🎉',
         '¡Perfecto! ⭐',
@@ -153,16 +189,22 @@ function showFeedback(isCorrect) {
     ];
     
     const messageList = isCorrect ? correctMessages : incorrectMessages;
-    const message = messageList[Math.floor(Math.random() * messageList.length)];
+    let message = messageList[Math.floor(Math.random() * messageList.length)];
     
-    feedbackEl.textContent = message;
     if (!isCorrect) {
         if (currentQuestion.question_type === 'identify-tense') {
-            feedbackEl.textContent += ` Correct tense: ${currentQuestion.correct_answer}`;
+            message += ` Correct tense: ${currentQuestion.correct_answer}`;
         } else {
-            feedbackEl.textContent += ` Correct answer: ${currentQuestion.correct_answer}`;
+            message += ` Correct answer: ${currentQuestion.correct_answer}`;
         }
     }
+    
+    // Add tense description if available
+    if (result.tense_description && result.tense_name) {
+        message += `\n\n${result.tense_name}: ${result.tense_description}`;
+    }
+    
+    feedbackEl.textContent = message;
     feedbackEl.classList.add('show', isCorrect ? 'correct' : 'incorrect');
 }
 

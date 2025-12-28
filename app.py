@@ -16,11 +16,18 @@ VERBS = load_verbs()
 PRONOUNS = ['yo', 'tú', 'él/ella', 'nosotros', 'vosotros', 'ellos']
 TENSES = ['presente', 'pretérito', 'imperfecto', 'futuro', 'condicional']
 TENSE_NAMES = {
-    'presente': 'Present',
-    'pretérito': 'Preterite',
-    'imperfecto': 'Imperfect',
-    'futuro': 'Future',
-    'condicional': 'Conditional'
+    'presente': 'Presente',
+    'pretérito': 'Pretérito',
+    'imperfecto': 'Imperfecto',
+    'futuro': 'Futuro',
+    'condicional': 'Condicional'
+}
+TENSE_DESCRIPTIONS = {
+    'presente': 'Used for current actions, habitual actions, and general truths.',
+    'pretérito': 'Used for completed actions in the past with a specific time frame.',
+    'imperfecto': 'Used for ongoing past actions, habitual past actions, and descriptions in the past.',
+    'futuro': 'Used for actions that will happen in the future.',
+    'condicional': 'Used for hypothetical situations, polite requests, and future actions from a past perspective.'
 }
 
 @app.route('/')
@@ -46,13 +53,18 @@ def get_question():
         all_tense_names = list(TENSE_NAMES.values())
         correct_tense_name = TENSE_NAMES[tense]
         
-        # Get 3 wrong tense names
+        # Get wrong tense names (we have 5 tenses, so get up to 3 others)
         wrong_tenses = [t for t in all_tense_names if t != correct_tense_name]
-        wrong_tenses = random.sample(wrong_tenses, min(3, len(wrong_tenses)))
+        # Since we have 5 tenses, we'll get 3 wrong ones for a total of 4 options
+        if len(wrong_tenses) > 3:
+            wrong_tenses = random.sample(wrong_tenses, 3)
         
         # Combine and shuffle
         all_options = [correct_tense_name] + wrong_tenses
         random.shuffle(all_options)
+        
+        # Ensure all options are unique
+        all_options = list(dict.fromkeys(all_options))
         
         return jsonify({
             'question_type': 'identify-tense',
@@ -95,13 +107,21 @@ def check_answer():
     data = request.json
     user_answer = data.get('answer', '').strip().lower()
     correct_answer = data.get('correct_answer', '').strip().lower()
+    tense = data.get('tense', '')
     
     is_correct = user_answer == correct_answer
     
-    return jsonify({
+    response = {
         'correct': is_correct,
         'correct_answer': data.get('correct_answer')
-    })
+    }
+    
+    # Add tense description if tense is provided
+    if tense and tense in TENSE_DESCRIPTIONS:
+        response['tense_description'] = TENSE_DESCRIPTIONS[tense]
+        response['tense_name'] = TENSE_NAMES[tense]
+    
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

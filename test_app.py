@@ -73,9 +73,12 @@ class TestFlaskRoutes(unittest.TestCase):
         self.assertIn('english', data)
         self.assertIn('pronoun', data)
         self.assertIn('tense', data)
-        self.assertIn('tense_english', data)
         self.assertIn('options', data)
         self.assertIn('correct_answer', data)
+        
+        # tense_english only appears in conjugation questions
+        if data.get('question_type') == 'conjugation':
+            self.assertIn('tense_english', data)
     
     def test_question_structure(self):
         """Test that question data is valid"""
