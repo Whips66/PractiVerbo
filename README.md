@@ -36,7 +36,24 @@ A fun and interactive web application for practicing Spanish verb conjugation, i
 
 1. Make sure you have Python 3.7+ installed
 
-2. Install dependencies:
+2. Create a virtual environment:
+```bash
+python -m venv venv
+```
+
+3. Activate the virtual environment:
+```bash
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+
+# Windows CMD
+venv\Scripts\activate.bat
+
+# Linux/Mac
+source venv/bin/activate
+```
+
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -54,6 +71,41 @@ http://localhost:5000
 ```
 
 3. Start practicing! 🎉
+
+## Running Tests
+
+The application includes comprehensive unit and integration tests.
+
+### Run all tests:
+```bash
+python run_tests.py
+```
+
+### Run specific test files:
+```bash
+# Unit tests
+python -m unittest test_app.py
+
+# Integration tests
+python -m unittest test_integration.py
+```
+
+### Test Coverage
+
+The test suite includes:
+- **23 tests** covering all functionality
+- **Unit tests** for verb database, Flask routes, and API endpoints
+- **Integration tests** for complete user workflows
+- **Coverage tests** for all verbs, tenses, and pronouns
+
+Test categories:
+- Verb database structure and validation
+- JSON file integrity
+- Flask API endpoints (`/`, `/api/question`, `/api/check`)
+- Question generation and randomization
+- Answer checking (correct/incorrect/case-insensitive)
+- Complete user workflows
+- Edge cases and error handling
 
 ## How to Play
 
