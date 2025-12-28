@@ -15,6 +15,80 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+}
+
+/* Mascot */
+.mascot {
+    position: absolute;
+    top: 80px;
+    right: -120px;
+    z-index: 100;
+    transition: all 0.5s ease;
+}
+
+.mascot-character {
+    position: relative;
+    font-size: 4rem;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+.mascot-emoji {
+    position: relative;
+    z-index: 3;
+}
+
+.mascot-hat {
+    position: absolute;
+    top: -35px;
+    left: 5px;
+    font-size: 2.5rem;
+    z-index: 4;
+    transform: rotate(-15deg);
+}
+
+.mascot-stache {
+    position: absolute;
+    top: 35px;
+    left: 15px;
+    font-size: 1.5rem;
+    z-index: 2;
+    filter: grayscale(100%) brightness(0.3);
+}
+
+.mascot.happy .mascot-character {
+    animation: bounce 0.6s ease, float 3s ease-in-out infinite;
+}
+
+.mascot.sad .mascot-character {
+    animation: shake 0.5s ease, float 3s ease-in-out infinite;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)) grayscale(50%);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-20px) scale(1.1); }
+    50% { transform: translateY(0) scale(1); }
+    75% { transform: translateY(-10px) scale(1.05); }
+}
+
+@media (max-width: 1000px) {
+    .mascot {
+        right: -80px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .mascot {
+        display: none;
+    }
 }
 
 /* Header */

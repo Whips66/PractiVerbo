@@ -18,6 +18,7 @@ const scoreEl = document.getElementById('score');
 const streakEl = document.getElementById('streak');
 const bestStreakEl = document.getElementById('best-streak');
 const progressBarEl = document.getElementById('progress-bar');
+const mascotEl = document.getElementById('mascot');
 
 // Load a new question
 async function loadQuestion() {
@@ -196,11 +197,13 @@ async function selectAnswer(answer, button) {
             button.classList.add('correct');
             showFeedback(true, result);
             updateScore(true);
+            updateMascot('happy');
             playSound('correct');
         } else {
             button.classList.add('incorrect');
             showFeedback(false, result);
             updateScore(false);
+            updateMascot('sad');
             playSound('incorrect');
             
             // Highlight correct answer
@@ -217,11 +220,13 @@ async function selectAnswer(answer, button) {
             button.classList.add('correct');
             showFeedback(true, {});
             updateScore(true);
+            updateMascot('happy');
             playSound('correct');
         } else {
             button.classList.add('incorrect');
             showFeedback(false, {});
             updateScore(false);
+            updateMascot('sad');
             playSound('incorrect');
             
             allButtons.forEach(btn => {
@@ -306,6 +311,16 @@ function updateScore(isCorrect) {
 function updateProgressBar() {
     const progress = (questionsAnswered % 10) * 10;
     progressBarEl.style.width = progress + '%';
+}
+
+// Update mascot state
+function updateMascot(state) {
+    mascotEl.className = 'mascot ' + state;
+    
+    // Reset animation after it completes
+    setTimeout(() => {
+        mascotEl.className = 'mascot';
+    }, 600);
 }
 
 // Play sound effect (visual feedback in absence of audio)
