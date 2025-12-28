@@ -14,20 +14,24 @@ def load_verbs():
 VERBS = load_verbs()
 
 PRONOUNS = ['yo', 'tú', 'él/ella', 'nosotros', 'vosotros', 'ellos']
-TENSES = ['presente', 'pretérito', 'imperfecto', 'futuro', 'condicional']
+TENSES = ['presente', 'pretérito', 'imperfecto', 'futuro', 'condicional', 'perfecto', 'pluscuamperfecto']
 TENSE_NAMES = {
     'presente': 'Presente',
     'pretérito': 'Pretérito',
     'imperfecto': 'Imperfecto',
     'futuro': 'Futuro',
-    'condicional': 'Condicional'
+    'condicional': 'Condicional',
+    'perfecto': 'Pretérito Perfecto',
+    'pluscuamperfecto': 'Pluscuamperfecto'
 }
 TENSE_DESCRIPTIONS = {
     'presente': 'Used for current actions, habitual actions, and general truths.',
     'pretérito': 'Used for completed actions in the past with a specific time frame.',
     'imperfecto': 'Used for ongoing past actions, habitual past actions, and descriptions in the past.',
     'futuro': 'Used for actions that will happen in the future.',
-    'condicional': 'Used for hypothetical situations, polite requests, and future actions from a past perspective.'
+    'condicional': 'Used for hypothetical situations, polite requests, and future actions from a past perspective.',
+    'perfecto': 'Used for actions that happened in the recent past or have relevance to the present.',
+    'pluscuamperfecto': 'Used for actions that had happened before another past action.'
 }
 
 @app.route('/')

@@ -6,7 +6,9 @@
         "pretérito": {"yo": "fui", "tú": "fuiste", "él/ella": "fue", "nosotros": "fuimos", "vosotros": "fuisteis", "ellos": "fueron"},
         "imperfecto": {"yo": "era", "tú": "eras", "él/ella": "era", "nosotros": "éramos", "vosotros": "erais", "ellos": "eran"},
         "futuro": {"yo": "seré", "tú": "serás", "él/ella": "será", "nosotros": "seremos", "vosotros": "seréis", "ellos": "serán"},
-        "condicional": {"yo": "sería", "tú": "serías", "él/ella": "sería", "nosotros": "seríamos", "vosotros": "seríais", "ellos": "serían"}
+        "condicional": {"yo": "sería", "tú": "serías", "él/ella": "sería", "nosotros": "seríamos", "vosotros": "seríais", "ellos": "serían"},
+        "perfecto": {"yo": "he sido", "tú": "has sido", "él/ella": "ha sido", "nosotros": "hemos sido", "vosotros": "habéis sido", "ellos": "han sido"},
+        "pluscuamperfecto": {"yo": "había sido", "tú": "habías sido", "él/ella": "había sido", "nosotros": "habíamos sido", "vosotros": "habíais sido", "ellos": "habían sido"}
     },
     "estar": {
         "english": "to be (location/condition)",
@@ -15,7 +17,9 @@
         "pretérito": {"yo": "estuve", "tú": "estuviste", "él/ella": "estuvo", "nosotros": "estuvimos", "vosotros": "estuvisteis", "ellos": "estuvieron"},
         "imperfecto": {"yo": "estaba", "tú": "estabas", "él/ella": "estaba", "nosotros": "estábamos", "vosotros": "estabais", "ellos": "estaban"},
         "futuro": {"yo": "estaré", "tú": "estarás", "él/ella": "estará", "nosotros": "estaremos", "vosotros": "estaréis", "ellos": "estarán"},
-        "condicional": {"yo": "estaría", "tú": "estarías", "él/ella": "estaría", "nosotros": "estaríamos", "vosotros": "estaríais", "ellos": "estarían"}
+        "condicional": {"yo": "estaría", "tú": "estarías", "él/ella": "estaría", "nosotros": "estaríamos", "vosotros": "estaríais", "ellos": "estarían"},
+        "perfecto": {"yo": "he estado", "tú": "has estado", "él/ella": "ha estado", "nosotros": "hemos estado", "vosotros": "habéis estado", "ellos": "han estado"},
+        "pluscuamperfecto": {"yo": "había estado", "tú": "habías estado", "él/ella": "había estado", "nosotros": "habíamos estado", "vosotros": "habíais estado", "ellos": "habían estado"}
     },
     "haber": {
         "english": "to have (auxiliary)",
@@ -24,7 +28,9 @@
         "pretérito": {"yo": "hube", "tú": "hubiste", "él/ella": "hubo", "nosotros": "hubimos", "vosotros": "hubisteis", "ellos": "hubieron"},
         "imperfecto": {"yo": "había", "tú": "habías", "él/ella": "había", "nosotros": "habíamos", "vosotros": "habíais", "ellos": "habían"},
         "futuro": {"yo": "habré", "tú": "habrás", "él/ella": "habrá", "nosotros": "habremos", "vosotros": "habréis", "ellos": "habrán"},
-        "condicional": {"yo": "habría", "tú": "habrías", "él/ella": "habría", "nosotros": "habríamos", "vosotros": "habríais", "ellos": "habrían"}
+        "condicional": {"yo": "habría", "tú": "habrías", "él/ella": "habría", "nosotros": "habríamos", "vosotros": "habríais", "ellos": "habrían"},
+        "perfecto": {"yo": "he habido", "tú": "has habido", "él/ella": "ha habido", "nosotros": "hemos habido", "vosotros": "habéis habido", "ellos": "han habido"},
+        "pluscuamperfecto": {"yo": "había habido", "tú": "habías habido", "él/ella": "había habido", "nosotros": "habíamos habido", "vosotros": "habíais habido", "ellos": "habían habido"}
     },
     "tener": {
         "english": "to have",
@@ -33,7 +39,9 @@
         "pretérito": {"yo": "tuve", "tú": "tuviste", "él/ella": "tuvo", "nosotros": "tuvimos", "vosotros": "tuvisteis", "ellos": "tuvieron"},
         "imperfecto": {"yo": "tenía", "tú": "tenías", "él/ella": "tenía", "nosotros": "teníamos", "vosotros": "teníais", "ellos": "tenían"},
         "futuro": {"yo": "tendré", "tú": "tendrás", "él/ella": "tendrá", "nosotros": "tendremos", "vosotros": "tendréis", "ellos": "tendrán"},
-        "condicional": {"yo": "tendría", "tú": "tendrías", "él/ella": "tendría", "nosotros": "tendríamos", "vosotros": "tendríais", "ellos": "tendrían"}
+        "condicional": {"yo": "tendría", "tú": "tendrías", "él/ella": "tendría", "nosotros": "tendríamos", "vosotros": "tendríais", "ellos": "tendrían"},
+        "perfecto": {"yo": "he tenido", "tú": "has tenido", "él/ella": "ha tenido", "nosotros": "hemos tenido", "vosotros": "habéis tenido", "ellos": "han tenido"},
+        "pluscuamperfecto": {"yo": "había tenido", "tú": "habías tenido", "él/ella": "había tenido", "nosotros": "habíamos tenido", "vosotros": "habíais tenido", "ellos": "habían tenido"}
     },
     "hacer": {
         "english": "to do/make",
@@ -42,7 +50,9 @@
         "pretérito": {"yo": "hice", "tú": "hiciste", "él/ella": "hizo", "nosotros": "hicimos", "vosotros": "hicisteis", "ellos": "hicieron"},
         "imperfecto": {"yo": "hacía", "tú": "hacías", "él/ella": "hacía", "nosotros": "hacíamos", "vosotros": "hacíais", "ellos": "hacían"},
         "futuro": {"yo": "haré", "tú": "harás", "él/ella": "hará", "nosotros": "haremos", "vosotros": "haréis", "ellos": "harán"},
-        "condicional": {"yo": "haría", "tú": "harías", "él/ella": "haría", "nosotros": "haríamos", "vosotros": "haríais", "ellos": "harían"}
+        "condicional": {"yo": "haría", "tú": "harías", "él/ella": "haría", "nosotros": "haríamos", "vosotros": "haríais", "ellos": "harían"},
+        "perfecto": {"yo": "he hecho", "tú": "has hecho", "él/ella": "ha hecho", "nosotros": "hemos hecho", "vosotros": "habéis hecho", "ellos": "han hecho"},
+        "pluscuamperfecto": {"yo": "había hecho", "tú": "habías hecho", "él/ella": "había hecho", "nosotros": "habíamos hecho", "vosotros": "habíais hecho", "ellos": "habían hecho"}
     },
     "poder": {
         "english": "to be able to",
@@ -51,7 +61,9 @@
         "pretérito": {"yo": "pude", "tú": "pudiste", "él/ella": "pudo", "nosotros": "pudimos", "vosotros": "pudisteis", "ellos": "pudieron"},
         "imperfecto": {"yo": "podía", "tú": "podías", "él/ella": "podía", "nosotros": "podíamos", "vosotros": "podíais", "ellos": "podían"},
         "futuro": {"yo": "podré", "tú": "podrás", "él/ella": "podrá", "nosotros": "podremos", "vosotros": "podréis", "ellos": "podrán"},
-        "condicional": {"yo": "podría", "tú": "podrías", "él/ella": "podría", "nosotros": "podríamos", "vosotros": "podríais", "ellos": "podrían"}
+        "condicional": {"yo": "podría", "tú": "podrías", "él/ella": "podría", "nosotros": "podríamos", "vosotros": "podríais", "ellos": "podrían"},
+        "perfecto": {"yo": "he podido", "tú": "has podido", "él/ella": "ha podido", "nosotros": "hemos podido", "vosotros": "habéis podido", "ellos": "han podido"},
+        "pluscuamperfecto": {"yo": "había podido", "tú": "habías podido", "él/ella": "había podido", "nosotros": "habíamos podido", "vosotros": "habíais podido", "ellos": "habían podido"}
     },
     "decir": {
         "english": "to say/tell",
@@ -60,7 +72,9 @@
         "pretérito": {"yo": "dije", "tú": "dijiste", "él/ella": "dijo", "nosotros": "dijimos", "vosotros": "dijisteis", "ellos": "dijeron"},
         "imperfecto": {"yo": "decía", "tú": "decías", "él/ella": "decía", "nosotros": "decíamos", "vosotros": "decíais", "ellos": "decían"},
         "futuro": {"yo": "diré", "tú": "dirás", "él/ella": "dirá", "nosotros": "diremos", "vosotros": "diréis", "ellos": "dirán"},
-        "condicional": {"yo": "diría", "tú": "dirías", "él/ella": "diría", "nosotros": "diríamos", "vosotros": "diríais", "ellos": "dirían"}
+        "condicional": {"yo": "diría", "tú": "dirías", "él/ella": "diría", "nosotros": "diríamos", "vosotros": "diríais", "ellos": "dirían"},
+        "perfecto": {"yo": "he dicho", "tú": "has dicho", "él/ella": "ha dicho", "nosotros": "hemos dicho", "vosotros": "habéis dicho", "ellos": "han dicho"},
+        "pluscuamperfecto": {"yo": "había dicho", "tú": "habías dicho", "él/ella": "había dicho", "nosotros": "habíamos dicho", "vosotros": "habíais dicho", "ellos": "habían dicho"}
     },
     "ir": {
         "english": "to go",
@@ -69,7 +83,9 @@
         "pretérito": {"yo": "fui", "tú": "fuiste", "él/ella": "fue", "nosotros": "fuimos", "vosotros": "fuisteis", "ellos": "fueron"},
         "imperfecto": {"yo": "iba", "tú": "ibas", "él/ella": "iba", "nosotros": "íbamos", "vosotros": "ibais", "ellos": "iban"},
         "futuro": {"yo": "iré", "tú": "irás", "él/ella": "irá", "nosotros": "iremos", "vosotros": "iréis", "ellos": "irán"},
-        "condicional": {"yo": "iría", "tú": "irías", "él/ella": "iría", "nosotros": "iríamos", "vosotros": "iríais", "ellos": "irían"}
+        "condicional": {"yo": "iría", "tú": "irías", "él/ella": "iría", "nosotros": "iríamos", "vosotros": "iríais", "ellos": "irían"},
+        "perfecto": {"yo": "he ido", "tú": "has ido", "él/ella": "ha ido", "nosotros": "hemos ido", "vosotros": "habéis ido", "ellos": "han ido"},
+        "pluscuamperfecto": {"yo": "había ido", "tú": "habías ido", "él/ella": "había ido", "nosotros": "habíamos ido", "vosotros": "habíais ido", "ellos": "habían ido"}
     },
     "ver": {
         "english": "to see",
@@ -78,7 +94,9 @@
         "pretérito": {"yo": "vi", "tú": "viste", "él/ella": "vio", "nosotros": "vimos", "vosotros": "visteis", "ellos": "vieron"},
         "imperfecto": {"yo": "veía", "tú": "veías", "él/ella": "veía", "nosotros": "veíamos", "vosotros": "veíais", "ellos": "veían"},
         "futuro": {"yo": "veré", "tú": "verás", "él/ella": "verá", "nosotros": "veremos", "vosotros": "veréis", "ellos": "verán"},
-        "condicional": {"yo": "vería", "tú": "verías", "él/ella": "vería", "nosotros": "veríamos", "vosotros": "veríais", "ellos": "verían"}
+        "condicional": {"yo": "vería", "tú": "verías", "él/ella": "vería", "nosotros": "veríamos", "vosotros": "veríais", "ellos": "verían"},
+        "perfecto": {"yo": "he visto", "tú": "has visto", "él/ella": "ha visto", "nosotros": "hemos visto", "vosotros": "habéis visto", "ellos": "han visto"},
+        "pluscuamperfecto": {"yo": "había visto", "tú": "habías visto", "él/ella": "había visto", "nosotros": "habíamos visto", "vosotros": "habíais visto", "ellos": "habían visto"}
     },
     "dar": {
         "english": "to give",
@@ -87,7 +105,9 @@
         "pretérito": {"yo": "di", "tú": "diste", "él/ella": "dio", "nosotros": "dimos", "vosotros": "disteis", "ellos": "dieron"},
         "imperfecto": {"yo": "daba", "tú": "dabas", "él/ella": "daba", "nosotros": "dábamos", "vosotros": "dabais", "ellos": "daban"},
         "futuro": {"yo": "daré", "tú": "darás", "él/ella": "dará", "nosotros": "daremos", "vosotros": "daréis", "ellos": "darán"},
-        "condicional": {"yo": "daría", "tú": "darías", "él/ella": "daría", "nosotros": "daríamos", "vosotros": "daríais", "ellos": "darían"}
+        "condicional": {"yo": "daría", "tú": "darías", "él/ella": "daría", "nosotros": "daríamos", "vosotros": "daríais", "ellos": "darían"},
+        "perfecto": {"yo": "he dado", "tú": "has dado", "él/ella": "ha dado", "nosotros": "hemos dado", "vosotros": "habéis dado", "ellos": "han dado"},
+        "pluscuamperfecto": {"yo": "había dado", "tú": "habías dado", "él/ella": "había dado", "nosotros": "habíamos dado", "vosotros": "habíais dado", "ellos": "habían dado"}
     },
     "saber": {
         "english": "to know",
@@ -96,7 +116,9 @@
         "pretérito": {"yo": "supe", "tú": "supiste", "él/ella": "supo", "nosotros": "supimos", "vosotros": "supisteis", "ellos": "supieron"},
         "imperfecto": {"yo": "sabía", "tú": "sabías", "él/ella": "sabía", "nosotros": "sabíamos", "vosotros": "sabíais", "ellos": "sabían"},
         "futuro": {"yo": "sabré", "tú": "sabrás", "él/ella": "sabrá", "nosotros": "sabremos", "vosotros": "sabréis", "ellos": "sabrán"},
-        "condicional": {"yo": "sabría", "tú": "sabrías", "él/ella": "sabría", "nosotros": "sabríamos", "vosotros": "sabríais", "ellos": "sabrían"}
+        "condicional": {"yo": "sabría", "tú": "sabrías", "él/ella": "sabría", "nosotros": "sabríamos", "vosotros": "sabríais", "ellos": "sabrían"},
+        "perfecto": {"yo": "he sabido", "tú": "has sabido", "él/ella": "ha sabido", "nosotros": "hemos sabido", "vosotros": "habéis sabido", "ellos": "han sabido"},
+        "pluscuamperfecto": {"yo": "había sabido", "tú": "habías sabido", "él/ella": "había sabido", "nosotros": "habíamos sabido", "vosotros": "habíais sabido", "ellos": "habían sabido"}
     },
     "querer": {
         "english": "to want",
@@ -105,7 +127,9 @@
         "pretérito": {"yo": "quise", "tú": "quisiste", "él/ella": "quiso", "nosotros": "quisimos", "vosotros": "quisisteis", "ellos": "quisieron"},
         "imperfecto": {"yo": "quería", "tú": "querías", "él/ella": "quería", "nosotros": "queríamos", "vosotros": "queríais", "ellos": "querían"},
         "futuro": {"yo": "querré", "tú": "querrás", "él/ella": "querrá", "nosotros": "querremos", "vosotros": "querréis", "ellos": "querrán"},
-        "condicional": {"yo": "querría", "tú": "querrías", "él/ella": "querría", "nosotros": "querríamos", "vosotros": "querríais", "ellos": "querrían"}
+        "condicional": {"yo": "querría", "tú": "querrías", "él/ella": "querría", "nosotros": "querríamos", "vosotros": "querríais", "ellos": "querrían"},
+        "perfecto": {"yo": "he querido", "tú": "has querido", "él/ella": "ha querido", "nosotros": "hemos querido", "vosotros": "habéis querido", "ellos": "han querido"},
+        "pluscuamperfecto": {"yo": "había querido", "tú": "habías querido", "él/ella": "había querido", "nosotros": "habíamos querido", "vosotros": "habíais querido", "ellos": "habían querido"}
     },
     "llegar": {
         "english": "to arrive",
@@ -114,7 +138,9 @@
         "pretérito": {"yo": "llegué", "tú": "llegaste", "él/ella": "llegó", "nosotros": "llegamos", "vosotros": "llegasteis", "ellos": "llegaron"},
         "imperfecto": {"yo": "llegaba", "tú": "llegabas", "él/ella": "llegaba", "nosotros": "llegábamos", "vosotros": "llegabais", "ellos": "llegaban"},
         "futuro": {"yo": "llegaré", "tú": "llegarás", "él/ella": "llegará", "nosotros": "llegaremos", "vosotros": "llegaréis", "ellos": "llegarán"},
-        "condicional": {"yo": "llegaría", "tú": "llegarías", "él/ella": "llegaría", "nosotros": "llegaríamos", "vosotros": "llegaríais", "ellos": "llegarían"}
+        "condicional": {"yo": "llegaría", "tú": "llegarías", "él/ella": "llegaría", "nosotros": "llegaríamos", "vosotros": "llegaríais", "ellos": "llegarían"},
+        "perfecto": {"yo": "he llegado", "tú": "has llegado", "él/ella": "ha llegado", "nosotros": "hemos llegado", "vosotros": "habéis llegado", "ellos": "han llegado"},
+        "pluscuamperfecto": {"yo": "había llegado", "tú": "habías llegado", "él/ella": "había llegado", "nosotros": "habíamos llegado", "vosotros": "habíais llegado", "ellos": "habían llegado"}
     },
     "pasar": {
         "english": "to pass/happen",
@@ -123,7 +149,9 @@
         "pretérito": {"yo": "pasé", "tú": "pasaste", "él/ella": "pasó", "nosotros": "pasamos", "vosotros": "pasasteis", "ellos": "pasaron"},
         "imperfecto": {"yo": "pasaba", "tú": "pasabas", "él/ella": "pasaba", "nosotros": "pasábamos", "vosotros": "pasabais", "ellos": "pasaban"},
         "futuro": {"yo": "pasaré", "tú": "pasarás", "él/ella": "pasará", "nosotros": "pasaremos", "vosotros": "pasaréis", "ellos": "pasarán"},
-        "condicional": {"yo": "pasaría", "tú": "pasarías", "él/ella": "pasaría", "nosotros": "pasaríamos", "vosotros": "pasaríais", "ellos": "pasarían"}
+        "condicional": {"yo": "pasaría", "tú": "pasarías", "él/ella": "pasaría", "nosotros": "pasaríamos", "vosotros": "pasaríais", "ellos": "pasarían"},
+        "perfecto": {"yo": "he pasado", "tú": "has pasado", "él/ella": "ha pasado", "nosotros": "hemos pasado", "vosotros": "habéis pasado", "ellos": "han pasado"},
+        "pluscuamperfecto": {"yo": "había pasado", "tú": "habías pasado", "él/ella": "había pasado", "nosotros": "habíamos pasado", "vosotros": "habíais pasado", "ellos": "habían pasado"}
     },
     "deber": {
         "english": "to owe/must",
@@ -132,7 +160,9 @@
         "pretérito": {"yo": "debí", "tú": "debiste", "él/ella": "debió", "nosotros": "debimos", "vosotros": "debisteis", "ellos": "debieron"},
         "imperfecto": {"yo": "debía", "tú": "debías", "él/ella": "debía", "nosotros": "debíamos", "vosotros": "debíais", "ellos": "debían"},
         "futuro": {"yo": "deberé", "tú": "deberás", "él/ella": "deberá", "nosotros": "deberemos", "vosotros": "deberéis", "ellos": "deberán"},
-        "condicional": {"yo": "debería", "tú": "deberías", "él/ella": "debería", "nosotros": "deberíamos", "vosotros": "deberíais", "ellos": "deberían"}
+        "condicional": {"yo": "debería", "tú": "deberías", "él/ella": "debería", "nosotros": "deberíamos", "vosotros": "deberíais", "ellos": "deberían"},
+        "perfecto": {"yo": "he debido", "tú": "has debido", "él/ella": "ha debido", "nosotros": "hemos debido", "vosotros": "habéis debido", "ellos": "han debido"},
+        "pluscuamperfecto": {"yo": "había debido", "tú": "habías debido", "él/ella": "había debido", "nosotros": "habíamos debido", "vosotros": "habíais debido", "ellos": "habían debido"}
     },
     "poner": {
         "english": "to put",
@@ -141,7 +171,9 @@
         "pretérito": {"yo": "puse", "tú": "pusiste", "él/ella": "puso", "nosotros": "pusimos", "vosotros": "pusisteis", "ellos": "pusieron"},
         "imperfecto": {"yo": "ponía", "tú": "ponías", "él/ella": "ponía", "nosotros": "poníamos", "vosotros": "poníais", "ellos": "ponían"},
         "futuro": {"yo": "pondré", "tú": "pondrás", "él/ella": "pondrá", "nosotros": "pondremos", "vosotros": "pondréis", "ellos": "pondrán"},
-        "condicional": {"yo": "pondría", "tú": "pondrías", "él/ella": "pondría", "nosotros": "pondríamos", "vosotros": "pondríais", "ellos": "pondrían"}
+        "condicional": {"yo": "pondría", "tú": "pondrías", "él/ella": "pondría", "nosotros": "pondríamos", "vosotros": "pondríais", "ellos": "pondrían"},
+        "perfecto": {"yo": "he puesto", "tú": "has puesto", "él/ella": "ha puesto", "nosotros": "hemos puesto", "vosotros": "habéis puesto", "ellos": "han puesto"},
+        "pluscuamperfecto": {"yo": "había puesto", "tú": "habías puesto", "él/ella": "había puesto", "nosotros": "habíamos puesto", "vosotros": "habíais puesto", "ellos": "habían puesto"}
     },
     "parecer": {
         "english": "to seem",
@@ -150,7 +182,9 @@
         "pretérito": {"yo": "parecí", "tú": "pareciste", "él/ella": "pareció", "nosotros": "parecimos", "vosotros": "parecisteis", "ellos": "parecieron"},
         "imperfecto": {"yo": "parecía", "tú": "parecías", "él/ella": "parecía", "nosotros": "parecíamos", "vosotros": "parecíais", "ellos": "parecían"},
         "futuro": {"yo": "pareceré", "tú": "parecerás", "él/ella": "parecerá", "nosotros": "pareceremos", "vosotros": "pareceréis", "ellos": "parecerán"},
-        "condicional": {"yo": "parecería", "tú": "parecerías", "él/ella": "parecería", "nosotros": "pareceríamos", "vosotros": "pareceríais", "ellos": "parecerían"}
+        "condicional": {"yo": "parecería", "tú": "parecerías", "él/ella": "parecería", "nosotros": "pareceríamos", "vosotros": "pareceríais", "ellos": "parecerían"},
+        "perfecto": {"yo": "he parecido", "tú": "has parecido", "él/ella": "ha parecido", "nosotros": "hemos parecido", "vosotros": "habéis parecido", "ellos": "han parecido"},
+        "pluscuamperfecto": {"yo": "había parecido", "tú": "habías parecido", "él/ella": "había parecido", "nosotros": "habíamos parecido", "vosotros": "habíais parecido", "ellos": "habían parecido"}
     },
     "quedar": {
         "english": "to remain/stay",
@@ -159,7 +193,9 @@
         "pretérito": {"yo": "quedé", "tú": "quedaste", "él/ella": "quedó", "nosotros": "quedamos", "vosotros": "quedasteis", "ellos": "quedaron"},
         "imperfecto": {"yo": "quedaba", "tú": "quedabas", "él/ella": "quedaba", "nosotros": "quedábamos", "vosotros": "quedabais", "ellos": "quedaban"},
         "futuro": {"yo": "quedaré", "tú": "quedarás", "él/ella": "quedará", "nosotros": "quedaremos", "vosotros": "quedaréis", "ellos": "quedarán"},
-        "condicional": {"yo": "quedaría", "tú": "quedarías", "él/ella": "quedaría", "nosotros": "quedaríamos", "vosotros": "quedaríais", "ellos": "quedarían"}
+        "condicional": {"yo": "quedaría", "tú": "quedarías", "él/ella": "quedaría", "nosotros": "quedaríamos", "vosotros": "quedaríais", "ellos": "quedarían"},
+        "perfecto": {"yo": "he quedado", "tú": "has quedado", "él/ella": "ha quedado", "nosotros": "hemos quedado", "vosotros": "habéis quedado", "ellos": "han quedado"},
+        "pluscuamperfecto": {"yo": "había quedado", "tú": "habías quedado", "él/ella": "había quedado", "nosotros": "habíamos quedado", "vosotros": "habíais quedado", "ellos": "habían quedado"}
     },
     "creer": {
         "english": "to believe",
@@ -168,7 +204,9 @@
         "pretérito": {"yo": "creí", "tú": "creíste", "él/ella": "creyó", "nosotros": "creímos", "vosotros": "creísteis", "ellos": "creyeron"},
         "imperfecto": {"yo": "creía", "tú": "creías", "él/ella": "creía", "nosotros": "creíamos", "vosotros": "creíais", "ellos": "creían"},
         "futuro": {"yo": "creeré", "tú": "creerás", "él/ella": "creerá", "nosotros": "creeremos", "vosotros": "creeréis", "ellos": "creerán"},
-        "condicional": {"yo": "creería", "tú": "creerías", "él/ella": "creería", "nosotros": "creeríamos", "vosotros": "creeríais", "ellos": "creerían"}
+        "condicional": {"yo": "creería", "tú": "creerías", "él/ella": "creería", "nosotros": "creeríamos", "vosotros": "creeríais", "ellos": "creerían"},
+        "perfecto": {"yo": "he creído", "tú": "has creído", "él/ella": "ha creído", "nosotros": "hemos creído", "vosotros": "habéis creído", "ellos": "han creído"},
+        "pluscuamperfecto": {"yo": "había creído", "tú": "habías creído", "él/ella": "había creído", "nosotros": "habíamos creído", "vosotros": "habíais creído", "ellos": "habían creído"}
     },
     "hablar": {
         "english": "to speak",
@@ -177,7 +215,9 @@
         "pretérito": {"yo": "hablé", "tú": "hablaste", "él/ella": "habló", "nosotros": "hablamos", "vosotros": "hablasteis", "ellos": "hablaron"},
         "imperfecto": {"yo": "hablaba", "tú": "hablabas", "él/ella": "hablaba", "nosotros": "hablábamos", "vosotros": "hablabais", "ellos": "hablaban"},
         "futuro": {"yo": "hablaré", "tú": "hablarás", "él/ella": "hablará", "nosotros": "hablaremos", "vosotros": "hablaréis", "ellos": "hablarán"},
-        "condicional": {"yo": "hablaría", "tú": "hablarías", "él/ella": "hablaría", "nosotros": "hablaríamos", "vosotros": "hablaríais", "ellos": "hablarían"}
+        "condicional": {"yo": "hablaría", "tú": "hablarías", "él/ella": "hablaría", "nosotros": "hablaríamos", "vosotros": "hablaríais", "ellos": "hablarían"},
+        "perfecto": {"yo": "he hablado", "tú": "has hablado", "él/ella": "ha hablado", "nosotros": "hemos hablado", "vosotros": "habéis hablado", "ellos": "han hablado"},
+        "pluscuamperfecto": {"yo": "había hablado", "tú": "habías hablado", "él/ella": "había hablado", "nosotros": "habíamos hablado", "vosotros": "habíais hablado", "ellos": "habían hablado"}
     },
     "llevar": {
         "english": "to carry/wear",
@@ -186,7 +226,9 @@
         "pretérito": {"yo": "llevé", "tú": "llevaste", "él/ella": "llevó", "nosotros": "llevamos", "vosotros": "llevasteis", "ellos": "llevaron"},
         "imperfecto": {"yo": "llevaba", "tú": "llevabas", "él/ella": "llevaba", "nosotros": "llevábamos", "vosotros": "llevabais", "ellos": "llevaban"},
         "futuro": {"yo": "llevaré", "tú": "llevarás", "él/ella": "llevará", "nosotros": "llevaremos", "vosotros": "llevaréis", "ellos": "llevarán"},
-        "condicional": {"yo": "llevaría", "tú": "llevarías", "él/ella": "llevaría", "nosotros": "llevaríamos", "vosotros": "llevaríais", "ellos": "llevarían"}
+        "condicional": {"yo": "llevaría", "tú": "llevarías", "él/ella": "llevaría", "nosotros": "llevaríamos", "vosotros": "llevaríais", "ellos": "llevarían"},
+        "perfecto": {"yo": "he llevado", "tú": "has llevado", "él/ella": "ha llevado", "nosotros": "hemos llevado", "vosotros": "habéis llevado", "ellos": "han llevado"},
+        "pluscuamperfecto": {"yo": "había llevado", "tú": "habías llevado", "él/ella": "había llevado", "nosotros": "habíamos llevado", "vosotros": "habíais llevado", "ellos": "habían llevado"}
     },
     "dejar": {
         "english": "to leave/let",
@@ -195,7 +237,9 @@
         "pretérito": {"yo": "dejé", "tú": "dejaste", "él/ella": "dejó", "nosotros": "dejamos", "vosotros": "dejasteis", "ellos": "dejaron"},
         "imperfecto": {"yo": "dejaba", "tú": "dejabas", "él/ella": "dejaba", "nosotros": "dejábamos", "vosotros": "dejabais", "ellos": "dejaban"},
         "futuro": {"yo": "dejaré", "tú": "dejarás", "él/ella": "dejará", "nosotros": "dejaremos", "vosotros": "dejaréis", "ellos": "dejarán"},
-        "condicional": {"yo": "dejaría", "tú": "dejarías", "él/ella": "dejaría", "nosotros": "dejaríamos", "vosotros": "dejaríais", "ellos": "dejarían"}
+        "condicional": {"yo": "dejaría", "tú": "dejarías", "él/ella": "dejaría", "nosotros": "dejaríamos", "vosotros": "dejaríais", "ellos": "dejarían"},
+        "perfecto": {"yo": "he dejado", "tú": "has dejado", "él/ella": "ha dejado", "nosotros": "hemos dejado", "vosotros": "habéis dejado", "ellos": "han dejado"},
+        "pluscuamperfecto": {"yo": "había dejado", "tú": "habías dejado", "él/ella": "había dejado", "nosotros": "habíamos dejado", "vosotros": "habíais dejado", "ellos": "habían dejado"}
     },
     "seguir": {
         "english": "to follow/continue",
@@ -204,7 +248,9 @@
         "pretérito": {"yo": "seguí", "tú": "seguiste", "él/ella": "siguió", "nosotros": "seguimos", "vosotros": "seguisteis", "ellos": "siguieron"},
         "imperfecto": {"yo": "seguía", "tú": "seguías", "él/ella": "seguía", "nosotros": "seguíamos", "vosotros": "seguíais", "ellos": "seguían"},
         "futuro": {"yo": "seguiré", "tú": "seguirás", "él/ella": "seguirá", "nosotros": "seguiremos", "vosotros": "seguiréis", "ellos": "seguirán"},
-        "condicional": {"yo": "seguiría", "tú": "seguirías", "él/ella": "seguiría", "nosotros": "seguiríamos", "vosotros": "seguiríais", "ellos": "seguirían"}
+        "condicional": {"yo": "seguiría", "tú": "seguirías", "él/ella": "seguiría", "nosotros": "seguiríamos", "vosotros": "seguiríais", "ellos": "seguirían"},
+        "perfecto": {"yo": "he seguido", "tú": "has seguido", "él/ella": "ha seguido", "nosotros": "hemos seguido", "vosotros": "habéis seguido", "ellos": "han seguido"},
+        "pluscuamperfecto": {"yo": "había seguido", "tú": "habías seguido", "él/ella": "había seguido", "nosotros": "habíamos seguido", "vosotros": "habíais seguido", "ellos": "habían seguido"}
     },
     "encontrar": {
         "english": "to find",
@@ -213,7 +259,9 @@
         "pretérito": {"yo": "encontré", "tú": "encontraste", "él/ella": "encontró", "nosotros": "encontramos", "vosotros": "encontrasteis", "ellos": "encontraron"},
         "imperfecto": {"yo": "encontraba", "tú": "encontrabas", "él/ella": "encontraba", "nosotros": "encontrábamos", "vosotros": "encontrabais", "ellos": "encontraban"},
         "futuro": {"yo": "encontraré", "tú": "encontrarás", "él/ella": "encontrará", "nosotros": "encontraremos", "vosotros": "encontraréis", "ellos": "encontrarán"},
-        "condicional": {"yo": "encontraría", "tú": "encontrarías", "él/ella": "encontraría", "nosotros": "encontraríamos", "vosotros": "encontraríais", "ellos": "encontrarían"}
+        "condicional": {"yo": "encontraría", "tú": "encontrarías", "él/ella": "encontraría", "nosotros": "encontraríamos", "vosotros": "encontraríais", "ellos": "encontrarían"},
+        "perfecto": {"yo": "he encontrado", "tú": "has encontrado", "él/ella": "ha encontrado", "nosotros": "hemos encontrado", "vosotros": "habéis encontrado", "ellos": "han encontrado"},
+        "pluscuamperfecto": {"yo": "había encontrado", "tú": "habías encontrado", "él/ella": "había encontrado", "nosotros": "habíamos encontrado", "vosotros": "habíais encontrado", "ellos": "habían encontrado"}
     },
     "llamar": {
         "english": "to call",
@@ -222,6 +270,8 @@
         "pretérito": {"yo": "llamé", "tú": "llamaste", "él/ella": "llamó", "nosotros": "llamamos", "vosotros": "llamasteis", "ellos": "llamaron"},
         "imperfecto": {"yo": "llamaba", "tú": "llamabas", "él/ella": "llamaba", "nosotros": "llamábamos", "vosotros": "llamabais", "ellos": "llamaban"},
         "futuro": {"yo": "llamaré", "tú": "llamarás", "él/ella": "llamará", "nosotros": "llamaremos", "vosotros": "llamaréis", "ellos": "llamarán"},
-        "condicional": {"yo": "llamaría", "tú": "llamarías", "él/ella": "llamaría", "nosotros": "llamaríamos", "vosotros": "llamaríais", "ellos": "llamarían"}
+        "condicional": {"yo": "llamaría", "tú": "llamarías", "él/ella": "llamaría", "nosotros": "llamaríamos", "vosotros": "llamaríais", "ellos": "llamarían"},
+        "perfecto": {"yo": "he llamado", "tú": "has llamado", "él/ella": "ha llamado", "nosotros": "hemos llamado", "vosotros": "habéis llamado", "ellos": "han llamado"},
+        "pluscuamperfecto": {"yo": "había llamado", "tú": "habías llamado", "él/ella": "había llamado", "nosotros": "habíamos llamado", "vosotros": "habíais llamado", "ellos": "habían llamado"}
     }
 }
