@@ -187,7 +187,10 @@ async function selectAnswer(answer, button) {
             body: JSON.stringify({
                 answer: answer,
                 correct_answer: currentQuestion.correct_answer,
-                tense: currentQuestion.tense
+                tense: currentQuestion.tense,
+                verb: currentQuestion.verb,
+                pronoun: currentQuestion.pronoun,
+                question_type: currentQuestion.question_type
             })
         });
         const result = await response.json();
@@ -271,6 +274,11 @@ function showFeedback(isCorrect, result = {}) {
             message += ` Correct verb: ${currentQuestion.correct_answer} (${currentQuestion.english})`;
         } else {
             message += ` Correct answer: ${currentQuestion.correct_answer}`;
+        }
+        
+        // Add hint if available
+        if (result.hint) {
+            message += `\n\n${result.hint}`;
         }
     }
     

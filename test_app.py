@@ -25,6 +25,7 @@ class TestVerbDatabase(unittest.TestCase):
                 self.assertIn('condicional', verb_data)
                 self.assertIn('perfecto', verb_data)
                 self.assertIn('pluscuamperfecto', verb_data)
+                self.assertIn('futuro perfecto', verb_data)
     
     def test_verb_conjugations(self):
         """Test that each tense has all pronouns"""
@@ -68,6 +69,14 @@ class TestVerbDatabase(unittest.TestCase):
                     # Should contain a space (haber + participle)
                     self.assertIn(' ', pluscuamperfecto[pronoun],
                                 f"{verb_name} pluscuamperfecto should be compound")
+                
+                # Check futuro perfecto has "haber" conjugations
+                futuro_perfecto = verb_data['futuro perfecto']
+                for pronoun in PRONOUNS:
+                    self.assertIn(pronoun, futuro_perfecto)
+                    # Should contain a space (haber + participle)
+                    self.assertIn(' ', futuro_perfecto[pronoun],
+                                f"{verb_name} futuro perfecto should be compound")
     
     def test_compound_tenses_use_haber(self):
         """Test that compound tenses use correct forms of haber"""
@@ -80,6 +89,10 @@ class TestVerbDatabase(unittest.TestCase):
                 # Pluscuamperfecto should start with imperfect tense of haber
                 pluscuamperfecto_yo = verb_data['pluscuamperfecto']['yo']
                 self.assertTrue(pluscuamperfecto_yo.startswith('había '))
+                
+                # Futuro perfecto should start with future tense of haber
+                futuro_perfecto_yo = verb_data['futuro perfecto']['yo']
+                self.assertTrue(futuro_perfecto_yo.startswith('habré '))
 
 
 class TestFlaskRoutes(unittest.TestCase):
@@ -539,7 +552,7 @@ class TestCompoundTenseQuestions(unittest.TestCase):
         self.client = self.app.test_client()
     
     def test_compound_tenses_in_questions(self):
-        """Test that perfecto and pluscuamperfecto appear in questions"""
+        """Test that perfecto, pluscuamperfecto, and futuro perfecto appear in questions"""
         tenses_seen = set()
         
         for _ in range(200):
@@ -549,9 +562,10 @@ class TestCompoundTenseQuestions(unittest.TestCase):
             if 'tense' in data:
                 tenses_seen.add(data['tense'])
         
-        # Should see both compound tenses
+        # Should see all compound tenses
         self.assertIn('perfecto', tenses_seen)
         self.assertIn('pluscuamperfecto', tenses_seen)
+        self.assertIn('futuro perfecto', tenses_seen)
     
     def test_compound_tense_conjugation_question(self):
         """Test that compound tenses can be used in conjugation questions"""
@@ -561,7 +575,7 @@ class TestCompoundTenseQuestions(unittest.TestCase):
             response = self.client.get('/api/question')
             data = json.loads(response.data)
             
-            if data.get('question_type') == 'conjugation' and data.get('tense') in ['perfecto', 'pluscuamperfecto']:
+            if data.get('question_type') == 'conjugation' and data.get('tense') in ['perfecto', 'pluscuamperfecto', 'futuro perfecto']:
                 found_compound = True
                 
                 # Verify the correct answer is a compound form
