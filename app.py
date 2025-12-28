@@ -37,27 +37,57 @@ def get_question():
     
     correct_answer = verb_data[tense][pronoun]
     
-    # Generate 3 wrong answers from other conjugations
-    all_conjugations = []
-    for t in TENSES:
-        all_conjugations.extend(verb_data[t].values())
+    # 25% of the time, ask to identify the tense instead of conjugating
+    question_type = 'identify-tense' if random.random() < 0.25 else 'conjugation'
     
-    wrong_answers = [conj for conj in all_conjugations if conj != correct_answer]
-    wrong_answers = random.sample(wrong_answers, min(3, len(wrong_answers)))
-    
-    # Combine and shuffle
-    all_answers = [correct_answer] + wrong_answers
-    random.shuffle(all_answers)
-    
-    return jsonify({
-        'verb': verb_infinitive,
-        'english': verb_data['english'],
-        'pronoun': pronoun,
-        'tense': tense,
-        'tense_english': TENSE_NAMES[tense],
-        'options': all_answers,
-        'correct_answer': correct_answer
-    })
+    if question_type == 'identify-tense':
+        # Show conjugated verb, ask for the tense
+        # Generate options with tense names
+        all_tense_names = list(TENSE_NAMES.values())
+        correct_tense_name = TENSE_NAMES[tense]
+        
+        # Get 3 wrong tense names
+        wrong_tenses = [t for t in all_tense_names if t != correct_tense_name]
+        wrong_tenses = random.sample(wrong_tenses, min(3, len(wrong_tenses)))
+        
+        # Combine and shuffle
+        all_options = [correct_tense_name] + wrong_tenses
+        random.shuffle(all_options)
+        
+        return jsonify({
+            'question_type': 'identify-tense',
+            'verb': verb_infinitive,
+            'english': verb_data['english'],
+            'pronoun': pronoun,
+            'conjugated_form': correct_answer,
+            'tense': tense,
+            'options': all_options,
+            'correct_answer': correct_tense_name
+        })
+    else:
+        # Standard conjugation question
+        # Generate 3 wrong answers from other conjugations
+        all_conjugations = []
+        for t in TENSES:
+            all_conjugations.extend(verb_data[t].values())
+        
+        wrong_answers = [conj for conj in all_conjugations if conj != correct_answer]
+        wrong_answers = random.sample(wrong_answers, min(3, len(wrong_answers)))
+        
+        # Combine and shuffle
+        all_answers = [correct_answer] + wrong_answers
+        random.shuffle(all_answers)
+        
+        return jsonify({
+            'question_type': 'conjugation',
+            'verb': verb_infinitive,
+            'english': verb_data['english'],
+            'pronoun': pronoun,
+            'tense': tense,
+            'tense_english': TENSE_NAMES[tense],
+            'options': all_answers,
+            'correct_answer': correct_answer
+        })
 
 @app.route('/api/check', methods=['POST'])
 def check_answer():

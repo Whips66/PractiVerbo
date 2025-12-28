@@ -82,26 +82,41 @@ class TestFlaskRoutes(unittest.TestCase):
         response = self.client.get('/api/question')
         data = json.loads(response.data)
         
+        # Check question type exists
+        self.assertIn('question_type', data)
+        self.assertIn(data['question_type'], ['conjugation', 'identify-tense'])
+        
         # Check verb is from our database
         self.assertIn(data['verb'], VERBS)
         
-        # Check pronoun is valid
-        self.assertIn(data['pronoun'], PRONOUNS)
-        
-        # Check tense is valid
-        self.assertIn(data['tense'], TENSES)
-        
-        # Check options structure
+        # Check common fields
+        self.assertIn('options', data)
         self.assertIsInstance(data['options'], list)
         self.assertEqual(len(data['options']), 4)
-        
-        # Check correct answer is in options
         self.assertIn(data['correct_answer'], data['options'])
         
-        # Check correct answer matches the verb conjugation
-        verb_data = VERBS[data['verb']]
-        expected_answer = verb_data[data['tense']][data['pronoun']]
-        self.assertEqual(data['correct_answer'], expected_answer)
+        if data['question_type'] == 'conjugation':
+            # Standard conjugation question checks
+            self.assertIn(data['pronoun'], PRONOUNS)
+            self.assertIn(data['tense'], TENSES)
+            
+            # Check correct answer matches the verb conjugation
+            verb_data = VERBS[data['verb']]
+            expected_answer = verb_data[data['tense']][data['pronoun']]
+            self.assertEqual(data['correct_answer'], expected_answer)
+        
+        elif data['question_type'] == 'identify-tense':
+            # Identify tense question checks
+            self.assertIn('conjugated_form', data)
+            self.assertIn(data['pronoun'], PRONOUNS)
+            
+            # Correct answer should be a tense name in English
+            from app import TENSE_NAMES
+            self.assertIn(data['correct_answer'], TENSE_NAMES.values())
+            
+            # Options should be tense names
+            for option in data['options']:
+                self.assertIn(option, TENSE_NAMES.values())
     
     def test_question_randomness(self):
         """Test that questions are randomized"""
@@ -212,6 +227,78 @@ class TestVerbsJSONFile(unittest.TestCase):
             self.assertIn('á', content)
             self.assertIn('é', content)
             self.assertIn('í', content)
+
+
+class TestIdentifyTenseQuestions(unittest.TestCase):
+    """Test the new identify-tense question type"""
+    
+    def setUp(self):
+        """Set up test client"""
+        self.app = app
+        self.app.config['TESTING'] = True
+        self.client = self.app.test_client()
+    
+    def test_identify_tense_appears(self):
+        """Test that identify-tense questions appear"""
+        question_types = set()
+        for _ in range(100):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            question_types.add(data['question_type'])
+        
+        # Both question types should appear
+        self.assertIn('conjugation', question_types)
+        self.assertIn('identify-tense', question_types)
+    
+    def test_identify_tense_structure(self):
+        """Test identify-tense question has correct structure"""
+        # Get multiple questions until we find an identify-tense one
+        for _ in range(50):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            if data['question_type'] == 'identify-tense':
+                # Check required fields
+                self.assertIn('verb', data)
+                self.assertIn('english', data)
+                self.assertIn('pronoun', data)
+                self.assertIn('conjugated_form', data)
+                self.assertIn('tense', data)
+                self.assertIn('options', data)
+                self.assertIn('correct_answer', data)
+                
+                # Check that conjugated form is valid
+                verb_data = VERBS[data['verb']]
+                self.assertIn(data['conjugated_form'], 
+                            [verb_data[t][data['pronoun']] for t in TENSES])
+                
+                # Check options are tense names
+                from app import TENSE_NAMES
+                for option in data['options']:
+                    self.assertIn(option, TENSE_NAMES.values())
+                
+                # Check correct answer matches the tense
+                expected_tense_name = TENSE_NAMES[data['tense']]
+                self.assertEqual(data['correct_answer'], expected_tense_name)
+                
+                break
+    
+    def test_identify_tense_frequency(self):
+        """Test that identify-tense appears approximately 25% of the time"""
+        iterations = 200
+        identify_tense_count = 0
+        
+        for _ in range(iterations):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            if data['question_type'] == 'identify-tense':
+                identify_tense_count += 1
+        
+        frequency = identify_tense_count / iterations
+        
+        # Should be around 25% (allow 10-40% due to randomness)
+        self.assertGreater(frequency, 0.10)
+        self.assertLess(frequency, 0.40)
 
 
 if __name__ == '__main__':

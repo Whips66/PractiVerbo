@@ -25,11 +25,53 @@ async function loadQuestion() {
         const response = await fetch('/api/question');
         currentQuestion = await response.json();
         
-        // Update UI
+        // Update UI based on question type
         infinitiveEl.textContent = currentQuestion.verb;
         englishEl.textContent = currentQuestion.english;
-        tenseBadgeEl.textContent = currentQuestion.tense_english;
-        pronounEl.textContent = currentQuestion.pronoun;
+        
+        if (currentQuestion.question_type === 'identify-tense') {
+            // Identify tense question
+            tenseBadgeEl.textContent = '❓ Identify the Tense';
+            tenseBadgeEl.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+            
+            pronounEl.textContent = currentQuestion.pronoun;
+            
+            // Show conjugated form in question
+            document.querySelector('.question h2').textContent = 'What tense is this conjugation?';
+            
+            // Create a special display for the conjugated form
+            const conjugatedDisplay = document.createElement('div');
+            conjugatedDisplay.className = 'conjugated-display';
+            conjugatedDisplay.style.fontSize = '2rem';
+            conjugatedDisplay.style.fontWeight = 'bold';
+            conjugatedDisplay.style.color = '#667eea';
+            conjugatedDisplay.style.padding = '20px';
+            conjugatedDisplay.style.background = '#f8f9ff';
+            conjugatedDisplay.style.borderRadius = '10px';
+            conjugatedDisplay.style.marginTop = '15px';
+            conjugatedDisplay.textContent = currentQuestion.conjugated_form;
+            
+            // Clear pronoun element and add conjugated form there
+            const questionSection = document.querySelector('.question');
+            const existingConjugated = questionSection.querySelector('.conjugated-display');
+            if (existingConjugated) {
+                existingConjugated.remove();
+            }
+            questionSection.appendChild(conjugatedDisplay);
+        } else {
+            // Standard conjugation question
+            tenseBadgeEl.textContent = currentQuestion.tense_english;
+            tenseBadgeEl.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            
+            document.querySelector('.question h2').textContent = 'Conjugate for:';
+            pronounEl.textContent = currentQuestion.pronoun;
+            
+            // Remove conjugated display if it exists
+            const existingConjugated = document.querySelector('.conjugated-display');
+            if (existingConjugated) {
+                existingConjugated.remove();
+            }
+        }
         
         // Create option buttons
         optionsEl.innerHTML = '';
@@ -95,28 +137,31 @@ async function selectAnswer(answer, button) {
 
 // Show feedback message
 function showFeedback(isCorrect) {
-    const messages = {
-        correct: [
-            '¡Excelente! 🎉',
-            '¡Perfecto! ⭐',
-            '¡Muy bien! 👏',
-            '¡Increíble! 🌟',
-            '¡Fantástico! 🎊',
-        ],
-        incorrect: [
-            'Not quite! Try again 💪',
-            'Keep practicing! 📚',
-            'Almost there! 🎯',
-            'You\'ll get it next time! 🚀',
-        ]
-    };
+    const correctMessages = [
+        '¡Excelente! 🎉',
+        '¡Perfecto! ⭐',
+        '¡Muy bien! 👏',
+        '¡Increíble! 🌟',
+        '¡Fantástico! 🎊',
+    ];
     
-    const messageList = isCorrect ? messages.correct : messages.incorrect;
+    const incorrectMessages = [
+        'Not quite! Try again 💪',
+        'Keep practicing! 📚',
+        'Almost there! 🎯',
+        'You\'ll get it next time! 🚀',
+    ];
+    
+    const messageList = isCorrect ? correctMessages : incorrectMessages;
     const message = messageList[Math.floor(Math.random() * messageList.length)];
     
     feedbackEl.textContent = message;
     if (!isCorrect) {
-        feedbackEl.textContent += ` Correct answer: ${currentQuestion.correct_answer}`;
+        if (currentQuestion.question_type === 'identify-tense') {
+            feedbackEl.textContent += ` Correct tense: ${currentQuestion.correct_answer}`;
+        } else {
+            feedbackEl.textContent += ` Correct answer: ${currentQuestion.correct_answer}`;
+        }
     }
     feedbackEl.classList.add('show', isCorrect ? 'correct' : 'incorrect');
 }
