@@ -26,8 +26,14 @@ async function loadQuestion() {
         currentQuestion = await response.json();
         
         // Update UI based on question type
-        infinitiveEl.textContent = currentQuestion.verb;
-        englishEl.textContent = currentQuestion.english;
+        // For identify-infinitive, hide the verb name (that's the answer!)
+        if (currentQuestion.question_type === 'identify-infinitive') {
+            infinitiveEl.textContent = '???';
+            englishEl.textContent = '';
+        } else {
+            infinitiveEl.textContent = currentQuestion.verb;
+            englishEl.textContent = currentQuestion.english;
+        }
         
         if (currentQuestion.question_type === 'identify-tense') {
             // Identify tense question
