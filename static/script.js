@@ -1,0 +1,197 @@
+// Game state
+let currentQuestion = null;
+let score = 0;
+let streak = 0;
+let bestStreak = 0;
+let questionsAnswered = 0;
+let isAnswered = false;
+
+// DOM elements
+const infinitiveEl = document.getElementById('infinitive');
+const englishEl = document.getElementById('english');
+const tenseBadgeEl = document.getElementById('tense-badge');
+const pronounEl = document.getElementById('pronoun');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('feedback');
+const nextBtnEl = document.getElementById('next-btn');
+const scoreEl = document.getElementById('score');
+const streakEl = document.getElementById('streak');
+const bestStreakEl = document.getElementById('best-streak');
+const progressBarEl = document.getElementById('progress-bar');
+
+// Load a new question
+async function loadQuestion() {
+    try {
+        const response = await fetch('/api/question');
+        currentQuestion = await response.json();
+        
+        // Update UI
+        infinitiveEl.textContent = currentQuestion.verb;
+        englishEl.textContent = currentQuestion.english;
+        tenseBadgeEl.textContent = currentQuestion.tense_english;
+        pronounEl.textContent = currentQuestion.pronoun;
+        
+        // Create option buttons
+        optionsEl.innerHTML = '';
+        currentQuestion.options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = option;
+            btn.addEventListener('click', () => selectAnswer(option, btn));
+            optionsEl.appendChild(btn);
+        });
+        
+        // Reset state
+        feedbackEl.classList.remove('show', 'correct', 'incorrect');
+        feedbackEl.textContent = '';
+        nextBtnEl.style.display = 'none';
+        isAnswered = false;
+        
+        // Update progress bar
+        updateProgressBar();
+        
+    } catch (error) {
+        console.error('Error loading question:', error);
+        infinitiveEl.textContent = 'Error loading question';
+    }
+}
+
+// Handle answer selection
+async function selectAnswer(answer, button) {
+    if (isAnswered) return;
+    isAnswered = true;
+    
+    // Disable all buttons
+    const allButtons = document.querySelectorAll('.option-btn');
+    allButtons.forEach(btn => btn.disabled = true);
+    
+    // Check answer
+    const isCorrect = answer === currentQuestion.correct_answer;
+    
+    // Update button styling
+    if (isCorrect) {
+        button.classList.add('correct');
+        showFeedback(true);
+        updateScore(true);
+        playSound('correct');
+    } else {
+        button.classList.add('incorrect');
+        showFeedback(false);
+        updateScore(false);
+        playSound('incorrect');
+        
+        // Highlight correct answer
+        allButtons.forEach(btn => {
+            if (btn.textContent === currentQuestion.correct_answer) {
+                btn.classList.add('correct');
+            }
+        });
+    }
+    
+    // Show next button
+    nextBtnEl.style.display = 'block';
+    questionsAnswered++;
+}
+
+// Show feedback message
+function showFeedback(isCorrect) {
+    const messages = {
+        correct: [
+            '¡Excelente! 🎉',
+            '¡Perfecto! ⭐',
+            '¡Muy bien! 👏',
+            '¡Increíble! 🌟',
+            '¡Fantástico! 🎊',
+        ],
+        incorrect: [
+            'Not quite! Try again 💪',
+            'Keep practicing! 📚',
+            'Almost there! 🎯',
+            'You\'ll get it next time! 🚀',
+        ]
+    };
+    
+    const messageList = isCorrect ? messages.correct : messages.incorrect;
+    const message = messageList[Math.floor(Math.random() * messageList.length)];
+    
+    feedbackEl.textContent = message;
+    if (!isCorrect) {
+        feedbackEl.textContent += ` Correct answer: ${currentQuestion.correct_answer}`;
+    }
+    feedbackEl.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+}
+
+// Update score and streak
+function updateScore(isCorrect) {
+    if (isCorrect) {
+        score += 10;
+        streak++;
+        if (streak > bestStreak) {
+            bestStreak = streak;
+            localStorage.setItem('bestStreak', bestStreak);
+        }
+    } else {
+        streak = 0;
+    }
+    
+    scoreEl.textContent = score;
+    streakEl.textContent = streak;
+    bestStreakEl.textContent = bestStreak;
+    
+    // Animate score
+    scoreEl.style.transform = 'scale(1.3)';
+    setTimeout(() => {
+        scoreEl.style.transform = 'scale(1)';
+    }, 200);
+}
+
+// Update progress bar
+function updateProgressBar() {
+    const progress = (questionsAnswered % 10) * 10;
+    progressBarEl.style.width = progress + '%';
+}
+
+// Play sound effect (visual feedback in absence of audio)
+function playSound(type) {
+    // Visual feedback
+    document.body.style.animation = type === 'correct' 
+        ? 'none' 
+        : 'none';
+    
+    // Force reflow to restart animation
+    setTimeout(() => {
+        document.body.style.animation = '';
+    }, 10);
+}
+
+// Load best streak from localStorage
+function loadBestStreak() {
+    const saved = localStorage.getItem('bestStreak');
+    if (saved) {
+        bestStreak = parseInt(saved);
+        bestStreakEl.textContent = bestStreak;
+    }
+}
+
+// Event listeners
+nextBtnEl.addEventListener('click', loadQuestion);
+
+// Initialize
+loadBestStreak();
+loadQuestion();
+
+// Add keyboard support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && nextBtnEl.style.display !== 'none') {
+        loadQuestion();
+    }
+    
+    // Number keys for quick answer selection
+    if (!isAnswered && e.key >= '1' && e.key <= '4') {
+        const index = parseInt(e.key) - 1;
+        const buttons = document.querySelectorAll('.option-btn');
+        if (buttons[index]) {
+            buttons[index].click();
+        }
+    }
+});

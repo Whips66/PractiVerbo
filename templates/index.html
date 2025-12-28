@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Verb Conjugation Practice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎯 Spanish Verb Practice</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Streak</span>
+                    <span class="stat-value" id="streak">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Best</span>
+                    <span class="stat-value" id="best-streak">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <div class="card" id="question-card">
+                <div class="verb-info">
+                    <div class="infinitive" id="infinitive">Loading...</div>
+                    <div class="english" id="english"></div>
+                    <div class="tense-badge" id="tense-badge"></div>
+                </div>
+
+                <div class="question">
+                    <h2>Conjugate for:</h2>
+                    <div class="pronoun" id="pronoun"></div>
+                </div>
+
+                <div class="options" id="options">
+                    <!-- Options will be inserted here -->
+                </div>
+
+                <div class="feedback" id="feedback">
+                    <!-- Feedback will appear here -->
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-primary" id="next-btn" style="display: none;">
+                        Next Question →
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>Practice makes perfect! 🌟</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
