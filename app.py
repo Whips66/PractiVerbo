@@ -291,7 +291,12 @@ def check_answer():
     pronoun = data.get('pronoun', '')
     question_type = data.get('question_type', 'conjugation')
     
-    is_correct = user_answer == correct_answer
+    # For identify-pronoun questions, check against all valid answers
+    all_correct_answers = data.get('all_correct_answers', [])
+    if question_type == 'identify-pronoun' and all_correct_answers:
+        is_correct = user_answer in [ans.strip().lower() for ans in all_correct_answers]
+    else:
+        is_correct = user_answer == correct_answer
     
     response = {
         'correct': is_correct,
@@ -341,7 +346,11 @@ def check_answer():
         # Pronoun identification hints
         elif question_type == 'identify-pronoun' and pronoun:
             if pronoun in PRONOUN_HINTS:
-                response['hint'] = f"💡 {PRONOUN_HINTS[pronoun]}"
+                hint_text = PRONOUN_HINTS[pronoun]
+                # If there are multiple correct answers, mention it
+                if all_correct_answers and len(all_correct_answers) > 1:
+                    hint_text += f" Note: In this tense, these pronouns share the same form: {', '.join(all_correct_answers)}"
+                response['hint'] = f"💡 {hint_text}"
         
         # Infinitive identification hints
         elif question_type == 'identify-infinitive' and verb:

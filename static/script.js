@@ -207,7 +207,8 @@ async function selectAnswer(answer, button) {
                 tense: currentQuestion.tense,
                 verb: currentQuestion.verb,
                 pronoun: currentQuestion.pronoun,
-                question_type: currentQuestion.question_type
+                question_type: currentQuestion.question_type,
+                all_correct_answers: currentQuestion.all_correct_answers || []
             })
         });
         const result = await response.json();
@@ -226,9 +227,14 @@ async function selectAnswer(answer, button) {
             updateMascot('sad');
             playSound('incorrect');
             
-            // Highlight correct answer
+            // Highlight correct answer(s)
             allButtons.forEach(btn => {
-                if (btn.textContent === currentQuestion.correct_answer) {
+                // For identify-pronoun, highlight all correct answers
+                if (currentQuestion.question_type === 'identify-pronoun' && 
+                    currentQuestion.all_correct_answers && 
+                    currentQuestion.all_correct_answers.includes(btn.textContent)) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === currentQuestion.correct_answer) {
                     btn.classList.add('correct');
                 }
             });
@@ -307,7 +313,12 @@ function showFeedback(isCorrect, result = {}) {
         if (currentQuestion.question_type === 'identify-tense') {
             message += ` Correct tense: ${currentQuestion.correct_answer}`;
         } else if (currentQuestion.question_type === 'identify-pronoun') {
-            message += ` Correct pronoun: ${currentQuestion.correct_answer}`;
+            // Show all correct answers if there are multiple
+            if (currentQuestion.all_correct_answers && currentQuestion.all_correct_answers.length > 1) {
+                message += ` Correct pronouns: ${currentQuestion.all_correct_answers.join(' or ')}`;
+            } else {
+                message += ` Correct pronoun: ${currentQuestion.correct_answer}`;
+            }
         } else if (currentQuestion.question_type === 'identify-infinitive') {
             message += ` Correct verb: ${currentQuestion.correct_answer} (${currentQuestion.english})`;
         } else {
