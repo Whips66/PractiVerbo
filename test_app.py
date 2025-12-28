@@ -23,6 +23,8 @@ class TestVerbDatabase(unittest.TestCase):
                 self.assertIn('imperfecto', verb_data)
                 self.assertIn('futuro', verb_data)
                 self.assertIn('condicional', verb_data)
+                self.assertIn('perfecto', verb_data)
+                self.assertIn('pluscuamperfecto', verb_data)
     
     def test_verb_conjugations(self):
         """Test that each tense has all pronouns"""
@@ -46,6 +48,38 @@ class TestVerbDatabase(unittest.TestCase):
         for verb_name, verb_data in VERBS.items():
             with self.subTest(verb=verb_name):
                 self.assertIn(verb_data['type'], valid_types)
+    
+    def test_compound_tenses_structure(self):
+        """Test that compound tenses have correct structure"""
+        for verb_name, verb_data in VERBS.items():
+            with self.subTest(verb=verb_name):
+                # Check perfecto has "haber" conjugations
+                perfecto = verb_data['perfecto']
+                for pronoun in PRONOUNS:
+                    self.assertIn(pronoun, perfecto)
+                    # Should contain a space (haber + participle)
+                    self.assertIn(' ', perfecto[pronoun], 
+                                f"{verb_name} perfecto should be compound")
+                
+                # Check pluscuamperfecto has "haber" conjugations
+                pluscuamperfecto = verb_data['pluscuamperfecto']
+                for pronoun in PRONOUNS:
+                    self.assertIn(pronoun, pluscuamperfecto)
+                    # Should contain a space (haber + participle)
+                    self.assertIn(' ', pluscuamperfecto[pronoun],
+                                f"{verb_name} pluscuamperfecto should be compound")
+    
+    def test_compound_tenses_use_haber(self):
+        """Test that compound tenses use correct forms of haber"""
+        for verb_name, verb_data in VERBS.items():
+            with self.subTest(verb=verb_name):
+                # Perfecto should start with present tense of haber
+                perfecto_yo = verb_data['perfecto']['yo']
+                self.assertTrue(perfecto_yo.startswith('he '))
+                
+                # Pluscuamperfecto should start with imperfect tense of haber
+                pluscuamperfecto_yo = verb_data['pluscuamperfecto']['yo']
+                self.assertTrue(pluscuamperfecto_yo.startswith('había '))
 
 
 class TestFlaskRoutes(unittest.TestCase):
@@ -176,6 +210,30 @@ class TestFlaskRoutes(unittest.TestCase):
         check_data = json.loads(check_response.data)
         self.assertTrue(check_data['correct'])
         self.assertEqual(check_data['correct_answer'], question_data['correct_answer'])
+    
+    def test_check_answer_with_tense_description(self):
+        """Test that tense description is returned when tense is provided"""
+        # Get a question first
+        response = self.client.get('/api/question')
+        question_data = json.loads(response.data)
+        
+        # Submit answer with tense (mimicking conjugation question)
+        if 'tense' in question_data:
+            check_response = self.client.post('/api/check',
+                                            json={
+                                                'answer': question_data['correct_answer'],
+                                                'correct_answer': question_data['correct_answer'],
+                                                'tense': question_data['tense']
+                                            },
+                                            content_type='application/json')
+            
+            check_data = json.loads(check_response.data)
+            
+            # Should include tense description
+            self.assertIn('tense_description', check_data)
+            self.assertIn('tense_name', check_data)
+            self.assertIsInstance(check_data['tense_description'], str)
+            self.assertGreater(len(check_data['tense_description']), 0)
     
     def test_check_answer_incorrect(self):
         """Test checking an incorrect answer"""
@@ -469,6 +527,134 @@ class TestIdentifyInfinitiveQuestions(unittest.TestCase):
         
         # Should see multiple different verbs
         self.assertGreater(len(verbs_seen), 5)
+
+
+class TestCompoundTenseQuestions(unittest.TestCase):
+    """Test that compound tenses appear in questions"""
+    
+    def setUp(self):
+        """Set up test client"""
+        self.app = app
+        self.app.config['TESTING'] = True
+        self.client = self.app.test_client()
+    
+    def test_compound_tenses_in_questions(self):
+        """Test that perfecto and pluscuamperfecto appear in questions"""
+        tenses_seen = set()
+        
+        for _ in range(200):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            if 'tense' in data:
+                tenses_seen.add(data['tense'])
+        
+        # Should see both compound tenses
+        self.assertIn('perfecto', tenses_seen)
+        self.assertIn('pluscuamperfecto', tenses_seen)
+    
+    def test_compound_tense_conjugation_question(self):
+        """Test that compound tenses can be used in conjugation questions"""
+        found_compound = False
+        
+        for _ in range(100):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            if data.get('question_type') == 'conjugation' and data.get('tense') in ['perfecto', 'pluscuamperfecto']:
+                found_compound = True
+                
+                # Verify the correct answer is a compound form
+                self.assertIn(' ', data['correct_answer'], 
+                            "Compound tense should have space (haber + participle)")
+                break
+        
+        self.assertTrue(found_compound, "Should find at least one compound tense question")
+
+
+class TestEdgeCases(unittest.TestCase):
+    """Test edge cases and error handling"""
+    
+    def setUp(self):
+        """Set up test client"""
+        self.app = app
+        self.app.config['TESTING'] = True
+        self.client = self.app.test_client()
+    
+    def test_all_question_types_have_enough_options(self):
+        """Test that all question types can generate 4 unique options"""
+        for _ in range(100):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            # Should always have 4 options
+            self.assertEqual(len(data['options']), 4)
+            
+            # All options should be unique
+            self.assertEqual(len(set(data['options'])), 4, 
+                           f"Duplicate options in {data['question_type']} question")
+    
+    def test_check_answer_handles_whitespace(self):
+        """Test that answer checking handles extra whitespace"""
+        response = self.client.get('/api/question')
+        question_data = json.loads(response.data)
+        
+        # Add extra whitespace to answer
+        answer_with_space = f"  {question_data['correct_answer']}  "
+        
+        check_response = self.client.post('/api/check',
+                                         json={
+                                             'answer': answer_with_space,
+                                             'correct_answer': question_data['correct_answer']
+                                         },
+                                         content_type='application/json')
+        
+        check_data = json.loads(check_response.data)
+        self.assertTrue(check_data['correct'])
+    
+    def test_special_characters_in_conjugations(self):
+        """Test that Spanish special characters are handled correctly"""
+        found_special_char = False
+        special_chars = ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü']
+        
+        for _ in range(50):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            correct_answer = data['correct_answer']
+            
+            # Check if any special character is in the answer
+            if any(char in correct_answer for char in special_chars):
+                found_special_char = True
+                
+                # Verify it's properly encoded
+                self.assertIsInstance(correct_answer, str)
+                break
+        
+        self.assertTrue(found_special_char, "Should find conjugations with Spanish characters")
+    
+    def test_question_type_distribution(self):
+        """Test that all 4 question types are reasonably distributed"""
+        type_counts = {
+            'conjugation': 0,
+            'identify-tense': 0,
+            'identify-pronoun': 0,
+            'identify-infinitive': 0
+        }
+        
+        iterations = 400
+        for _ in range(iterations):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            type_counts[data['question_type']] += 1
+        
+        # Each type should appear at least 15% of the time (allowing for randomness)
+        for qtype, count in type_counts.items():
+            percentage = count / iterations
+            self.assertGreater(percentage, 0.15, 
+                             f"{qtype} appeared only {percentage:.1%} of the time")
+            self.assertLess(percentage, 0.35,
+                          f"{qtype} appeared {percentage:.1%} of the time (too high)")
 
 
 if __name__ == '__main__':
