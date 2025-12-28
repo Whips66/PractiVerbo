@@ -329,5 +329,66 @@ class TestIdentifyTenseQuestions(unittest.TestCase):
         self.assertLess(conjugation_freq, 0.46)
 
 
+class TestIdentifyPronounQuestions(unittest.TestCase):
+    """Test the identify-pronoun question type"""
+    
+    def setUp(self):
+        """Set up test client"""
+        self.app = app
+        self.app.config['TESTING'] = True
+        self.client = self.app.test_client()
+    
+    def test_identify_pronoun_structure(self):
+        """Test identify-pronoun question has correct structure"""
+        # Get multiple questions until we find an identify-pronoun one
+        for _ in range(50):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            if data['question_type'] == 'identify-pronoun':
+                # Check required fields
+                self.assertIn('verb', data)
+                self.assertIn('english', data)
+                self.assertIn('tense', data)
+                self.assertIn('tense_name', data)
+                self.assertIn('conjugated_form', data)
+                self.assertIn('pronoun', data)
+                self.assertIn('options', data)
+                self.assertIn('correct_answer', data)
+                
+                # Check that conjugated form is valid
+                verb_data = VERBS[data['verb']]
+                expected_form = verb_data[data['tense']][data['pronoun']]
+                self.assertEqual(data['conjugated_form'], expected_form)
+                
+                # Check options are pronouns
+                for option in data['options']:
+                    self.assertIn(option, PRONOUNS)
+                
+                # Check correct answer matches the pronoun
+                self.assertEqual(data['correct_answer'], data['pronoun'])
+                self.assertIn(data['correct_answer'], PRONOUNS)
+                
+                # Check we have 4 unique pronoun options
+                self.assertEqual(len(data['options']), 4)
+                self.assertEqual(len(set(data['options'])), 4)
+                
+                break
+    
+    def test_identify_pronoun_coverage(self):
+        """Test that all pronouns can appear as correct answers"""
+        pronouns_seen = set()
+        
+        for _ in range(100):
+            response = self.client.get('/api/question')
+            data = json.loads(response.data)
+            
+            if data['question_type'] == 'identify-pronoun':
+                pronouns_seen.add(data['correct_answer'])
+        
+        # Should see multiple different pronouns
+        self.assertGreater(len(pronouns_seen), 3)
+
+
 if __name__ == '__main__':
     unittest.main()

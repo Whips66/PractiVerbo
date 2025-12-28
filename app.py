@@ -120,12 +120,18 @@ def get_question():
         for t in TENSES:
             all_conjugations.extend(verb_data[t].values())
         
+        # Get unique wrong answers
         wrong_answers = [conj for conj in all_conjugations if conj != correct_answer]
+        # Remove duplicates
+        wrong_answers = list(set(wrong_answers))
         wrong_answers = random.sample(wrong_answers, min(3, len(wrong_answers)))
         
         # Combine and shuffle
         all_answers = [correct_answer] + wrong_answers
         random.shuffle(all_answers)
+        
+        # Ensure all options are unique (should be, but double check)
+        all_answers = list(dict.fromkeys(all_answers))
         
         return jsonify({
             'question_type': 'conjugation',
